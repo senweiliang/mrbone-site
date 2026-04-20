@@ -6,7 +6,7 @@ import { defineConfig, fontProviders } from 'astro/config';
 import remarkWikiLink from 'remark-wiki-link';
 
 export default defineConfig({
-	site: 'https://example.com',
+	site: 'https://mrbone.vercel.app',
 	integrations: [mdx(), sitemap()],
 	markdown: {
 		remarkPlugins: [
