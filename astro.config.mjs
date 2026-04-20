@@ -3,11 +3,23 @@
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import { defineConfig, fontProviders } from 'astro/config';
+import remarkWikiLink from 'remark-wiki-link';
 
-// https://astro.build/config
 export default defineConfig({
 	site: 'https://example.com',
 	integrations: [mdx(), sitemap()],
+	markdown: {
+		remarkPlugins: [
+			[
+				remarkWikiLink,
+				{
+					pageResolver: (name) => [name.replace(/ /g, '-').toLowerCase()],
+					hrefTemplate: (permalink) => `/blog/${permalink}`,
+					aliasDivider: '|',
+				},
+			],
+		],
+	},
 	fonts: [
 		{
 			provider: fontProviders.local(),

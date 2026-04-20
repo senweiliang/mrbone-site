@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1e1b2e"/>
+      <stop offset="1" stop-color="#2a2440"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="18"/>
+      <feOffset dx="0" dy="12" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.4"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+
+  <g transform="translate(140, 120)" filter="url(#shadow)">
+    <rect width="1320" height="660" rx="12" fill="#282a36"/>
+
+    <circle cx="32" cy="32" r="8" fill="#ff5f57"/>
+    <circle cx="58" cy="32" r="8" fill="#febc2e"/>
+    <circle cx="84" cy="32" r="8" fill="#28c840"/>
+
+    <g font-family="'SF Mono', 'Menlo', 'Consolas', monospace" font-size="26" font-weight="500">
+      <text x="48" y="120">
+        <tspan fill="#50fa7b">$</tspan>
+        <tspan fill="#f8f8f2" dx="16">git</tspan>
+        <tspan fill="#8be9fd" dx="10">worktree</tspan>
+        <tspan fill="#8be9fd" dx="10">add</tspan>
+        <tspan fill="#ffb86c" dx="14">../project-hotfix</tspan>
+        <tspan fill="#bd93f9" dx="14">develop</tspan>
+      </text>
+
+      <text x="48" y="170" fill="#6272a4">Preparing worktree (checking out 'develop')</text>
+      <text x="48" y="210" fill="#6272a4">HEAD is now at a1b2c3d Fix urgent bug in prod</text>
+
+      <text x="48" y="300">
+        <tspan fill="#50fa7b">$</tspan>
+        <tspan fill="#f8f8f2" dx="16">cd</tspan>
+        <tspan fill="#ffb86c" dx="14">../project-hotfix</tspan>
+      </text>
+
+      <text x="48" y="360">
+        <tspan fill="#50fa7b">$</tspan>
+        <tspan fill="#f8f8f2" dx="16">git</tspan>
+        <tspan fill="#8be9fd" dx="10">worktree</tspan>
+        <tspan fill="#8be9fd" dx="10">list</tspan>
+      </text>
+
+      <text x="48" y="420">
+        <tspan fill="#f1fa8c">/Users/mrbone/project</tspan>
+        <tspan fill="#6272a4" dx="60">a1b2c3d</tspan>
+        <tspan fill="#ff79c6" dx="30">[feature]</tspan>
+      </text>
+      <text x="48" y="460">
+        <tspan fill="#f1fa8c">/Users/mrbone/project-hotfix</tspan>
+        <tspan fill="#6272a4" dx="20">e4f5g6h</tspan>
+        <tspan fill="#ff79c6" dx="30">[develop]</tspan>
+      </text>
+
+      <text x="48" y="560">
+        <tspan fill="#50fa7b">$</tspan>
+      </text>
+      <rect x="82" y="538" width="14" height="28" fill="#f8f8f2">
+        <animate attributeName="opacity" values="1;0;1" dur="1.2s" repeatCount="indefinite"/>
+      </rect>
+    </g>
+
+    <text x="1260" y="640" font-family="'SF Mono', monospace" font-size="18" fill="#44475a" text-anchor="end">
+      git worktree · mrbone.dev
+    </text>
+  </g>
+</svg>
