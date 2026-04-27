@@ -1,0 +1,61 @@
+---
+const serverURL = import.meta.env.PUBLIC_WALINE_SERVER_URL ?? '';
+---
+<section class="comments">
+	<h2>评论</h2>
+	{serverURL ? (
+		<div id="waline" data-server-url={serverURL}></div>
+	) : (
+		<p class="placeholder">评论系统配置中…</p>
+	)}
+</section>
+
+<style>
+	.comments {
+		width: 720px;
+		max-width: calc(100% - 2em);
+		margin: 4em auto 3em;
+		padding: 0 1em;
+	}
+	.comments h2 {
+		font-size: 1.25rem;
+		font-weight: 600;
+		margin: 0 0 1.5em 0;
+		padding-bottom: 0.5em;
+		border-bottom: 1px solid var(--rule);
+		color: var(--ink);
+		letter-spacing: 0.02em;
+	}
+	.placeholder {
+		color: var(--ink);
+		opacity: 0.5;
+		font-style: italic;
+	}
+</style>
+
+<script>
+	import { init } from '@waline/client';
+	import '@waline/client/style';
+
+	const el = document.getElementById('waline');
+	if (el && el.dataset.serverUrl) {
+		init({
+			el,
+			serverURL: el.dataset.serverUrl,
+			path: window.location.pathname,
+			lang: 'zh-CN',
+			locale: { placeholder: '说点什么…（昵称必填，邮箱选填）' },
+			meta: ['nick', 'mail'],
+			requiredMeta: ['nick'],
+			emoji: [
+				'https://unpkg.com/@waline/emojis@1.2.0/weibo',
+				'https://unpkg.com/@waline/emojis@1.2.0/bilibili',
+			],
+			pageview: false,
+			reaction: true,
+			search: false,
+			imageUploader: false,
+			wordLimit: 500,
+		});
+	}
+</script>
