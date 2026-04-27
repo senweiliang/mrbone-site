@@ -53,7 +53,10 @@
 
 ## 写一篇新博文
 
-在 `src/content/blog/` 下新建 `your-slug.md` 或 `.mdx`：
+写作流程使用 [Obsidian](https://obsidian.md/)，把 `src/content/blog/` 作为 Obsidian Vault 直接打开：
+
+1. 在 Obsidian 中以 `src/content/blog/` 为 vault 路径打开。
+2. 新建 `your-slug.md`，按下面的模板补全 frontmatter：
 
 ```md
 ---
@@ -63,8 +66,10 @@ pubDate: 'Apr 27 2026'
 heroImage: './your-slug-hero.png'   # 可选，相对于 markdown 文件
 ---
 
-正文内容……支持 [[双向链接]]、代码块、组件（MDX）。
+这里写正文。Obsidian 原生的 `[[wiki 链接]]` 会被 `remark-wiki-link` 转成站内路由 `/blog/<slug>`。
 ```
+
+3. 保存后回到项目根目录运行 `pnpm dev` 实时预览，或直接 commit 推送触发部署。
 
 `content.config.ts` 中的 schema 会校验 frontmatter，缺字段或类型不对都会在 `pnpm dev` 与 `pnpm build` 时报错。
 
@@ -72,7 +77,3 @@ heroImage: './your-slug-hero.png'   # 可选，相对于 markdown 文件
 
 - 推送到 `main`，Vercel 基于 `astro.config.mjs` 中的 `site` 自动构建并发布。
 - Netlify 作为备用线路，使用根目录的 `netlify.toml`（`pnpm build` → `dist/`）。
-
-## 致谢
-
-主题基于 Astro 官方的 Blog Starter 与 [Bear Blog](https://github.com/HermanMartinus/bearblog/)，在此基础上做了排版、字体、双向链接与中文写作适配。
