@@ -1,63 +1,78 @@
-# Astro Starter Kit: Blog
+# mrbone
 
-```sh
-pnpm create astro@latest -- --template blog
-```
+> 一个记录学习、想法、与 demo 的数字花园。
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+线上地址：[mrbone.vercel.app](https://mrbone.vercel.app)
 
-Features:
+## 技术栈
 
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and Open Graph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
+| 类别 | 选择 | 说明 |
+| :--- | :--- | :--- |
+| 框架 | [Astro](https://astro.build/) `^6.1.8` | 静态站点生成，零 JS 默认输出，按需 island 化 |
+| 内容 | Markdown + [MDX](https://mdxjs.com/) | 通过 `@astrojs/mdx` 集成，支持在 MD 中嵌入组件 |
+| 集合 | Astro Content Collections | 用 `src/content/blog/` 管理博文，frontmatter 类型校验 |
+| 双向链接 | [`remark-wiki-link`](https://github.com/landakram/remark-wiki-link) | 支持 `[[wiki 风格]]` 链接，匹配数字花园写作习惯 |
+| 字体 | Astro Fonts（本地） | `Atkinson` 字体本地托管，`font-display: swap` |
+| 样式 | 原生 CSS + CSS Variables | 不引入 Tailwind，保持轻量；样式集中在 `src/styles/` |
+| RSS | [`@astrojs/rss`](https://docs.astro.build/en/recipes/rss/) | 自动生成 `/rss.xml` |
+| Sitemap | [`@astrojs/sitemap`](https://docs.astro.build/en/guides/integrations-guide/sitemap/) | 自动生成站点地图，利于 SEO |
+| 图像 | [`sharp`](https://sharp.pixelplumbing.com/) | Astro 内置图像优化 |
+| 包管理 | [`pnpm`](https://pnpm.io/) `10.28.2` | 通过 `packageManager` 字段锁定 |
+| 部署 | [Vercel](https://vercel.com/)（主） + [Netlify](https://www.netlify.com/)（备） | Vercel 用作主站；Netlify 通过 `netlify.toml` 提供大陆可访问的镜像 |
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
+## 项目结构
 
 ```text
-├── public/
+.
+├── public/                  # 静态资源（favicon、OG 图等）
 ├── src/
-│   ├── assets/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   └── pages/
-├── astro.config.mjs
-├── README.md
-├── package.json
-└── tsconfig.json
+│   ├── assets/              # 字体、图片等需经 Astro 处理的资源
+│   ├── components/          # Astro 组件（Header / Footer / BaseHead 等）
+│   ├── content/
+│   │   └── blog/            # 博文 Markdown / MDX 文件
+│   ├── content.config.ts    # Content Collections schema 定义
+│   ├── layouts/             # 页面布局
+│   ├── pages/               # 路由（index / about / blog / rss.xml.js）
+│   ├── styles/              # 全局样式与设计 token
+│   └── consts.ts            # 站点级常量（标题、描述）
+├── astro.config.mjs         # Astro 配置（集成、字体、remark 插件）
+├── netlify.toml             # Netlify 构建配置
+├── tsconfig.json
+└── package.json
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## 常用命令
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+| 命令 | 作用 |
+| :--- | :--- |
+| `pnpm install` | 安装依赖 |
+| `pnpm dev` | 启动本地开发服务器（`localhost:4321`） |
+| `pnpm build` | 构建生产站点到 `./dist/` |
+| `pnpm preview` | 本地预览构建产物 |
+| `pnpm astro ...` | 调用 Astro CLI（如 `astro check`） |
 
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
+## 写一篇新博文
 
-Any static assets, like images, can be placed in the `public/` directory.
+在 `src/content/blog/` 下新建 `your-slug.md` 或 `.mdx`：
 
-## 🧞 Commands
+```md
+---
+title: '标题'
+description: '一句话摘要'
+pubDate: 'Apr 27 2026'
+heroImage: './your-slug-hero.png'   # 可选，相对于 markdown 文件
+---
 
-All commands are run from the root of the project, from a terminal:
+正文内容……支持 [[双向链接]]、代码块、组件（MDX）。
+```
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+`content.config.ts` 中的 schema 会校验 frontmatter，缺字段或类型不对都会在 `pnpm dev` 与 `pnpm build` 时报错。
 
-## 👀 Want to learn more?
+## 部署
 
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- 推送到 `main`，Vercel 基于 `astro.config.mjs` 中的 `site` 自动构建并发布。
+- Netlify 作为备用线路，使用根目录的 `netlify.toml`（`pnpm build` → `dist/`）。
 
-## Credit
+## 致谢
 
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+主题基于 Astro 官方的 Blog Starter 与 [Bear Blog](https://github.com/HermanMartinus/bearblog/)，在此基础上做了排版、字体、双向链接与中文写作适配。
